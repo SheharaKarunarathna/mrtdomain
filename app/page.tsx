@@ -2,6 +2,8 @@
 import { useState, useEffect } from "react";
 import SearchComponent from "@/components/SearchComponent";
 import FeatureCards from "@/components/FeatureCards";
+import RequestButton from "@/components/RequestButton";
+import ProcessFlow from "@/components/ProcessFlow";
 
 export default function Home() {
   const [displayedText, setDisplayedText] = useState("");
@@ -67,10 +69,11 @@ export default function Home() {
 
       {/* Main Content */}
       <div className="relative z-10 flex flex-col justify-center min-h-screen px-6 md:pl-[5%] md:pr-8">
-
+        <br />
         {/* Hero Heading */}
         <h1 className="text-6xl md:text-[8rem] leading-tight md:leading-[0.85] font-black text-black tracking-tighter mb-8 md:mb-12">
           <div className="flex flex-col gap-2 md:gap-4">
+
             <span>ARE</span>
             <span>YOU IN</span>
             <span>MORATUWA?</span>
@@ -83,11 +86,17 @@ export default function Home() {
           <span className="inline-block w-2 h-6 md:w-3 md:h-8 bg-blue-600 ml-1 align-middle animate-pulse"></span>
         </p>
 
-        {/* Search Bar */}
-        <SearchComponent />
+        {/* Search Bar & Request Button */}
+        <div className="flex flex-col md:flex-row items-center gap-4 max-w-4xl w-full mb-12">
+          <div className="flex-1">
+            <SearchComponent />
+            <br />
+            <RequestButton />
+          </div>
+        </div>
 
         {/* Status Indicators */}
-        <div className="flex items-center space-x-8 text-sm font-mono text-gray-500">
+        <div className="flex items-center space-x-8 text-sm font-mono text-gray-500 mb-12">
           <div className="flex items-center">
             <span className="w-2 h-2 bg-green-500 rounded-full mr-2"></span>
             System Operational
@@ -97,14 +106,19 @@ export default function Home() {
             3 subdomains registered today
           </div>
         </div>
-      </div>
 
-      {/* Footer Elements */}
-      <div className="absolute bottom-8 left-[5%] z-20">
+        {/* Description Paragraph */}
+      </div>
+      <div className="relative flex flex-col px-6 md:pl-[5%] md:pr-8 py-20">
+        <p className="text-lg md:text-3xl text-blue-800 max-w-7xl leading-relaxed mb-12 text-center">
+          Elevate your digital footprint with a specialized <span className="font-mono text-gray-600 font-bold">mrt.lk</span> subdomain. Designed for the innovators of Moratuwa, our platform offers the perfect home for your next big project, student organization, or professional portfolio.
+        </p>
         <div className="w-10 h-10 bg-slate-900 rounded-full flex items-center justify-center text-white font-bold text-sm">
           N
         </div>
+
       </div>
+      {/* Footer Elements */}
 
       <div className="absolute bottom-8 right-8 z-20 text-xs text-slate-400 font-mono">
         © 2026 MRT.LK Registry
@@ -112,6 +126,7 @@ export default function Home() {
 
       {/* Feature Section (Pushed below fold) */}
       <FeatureCards />
+      <ProcessFlow />
     </div>
   );
 }
