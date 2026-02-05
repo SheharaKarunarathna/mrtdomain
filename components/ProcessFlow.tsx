@@ -3,7 +3,7 @@ export default function ProcessFlow() {
         <div className="w-full py-24 relative z-10">
             <div className="text-center mb-20 px-4">
                 <h2 className="text-blue-500 font-bold tracking-widest text-sm mb-4 uppercase">Process Flow</h2>
-                <h3 className="text-4xl md:text-6xl font-black text-slate-900 mb-6">Launch your identity in minutes</h3>
+                <h3 className="text-4xl md:text-6xl font-black font-mono text-slate-900 mb-6">Launch your identity in minutes</h3>
                 <p className="text-gray-500 max-w-2xl mx-auto text-lg">
                     A streamlined process designed for the modern web. From idea to online in four simple steps.
                 </p>
@@ -34,7 +34,7 @@ export default function ProcessFlow() {
                             </div>
                         </div>
                         <h4 className="text-xl font-bold text-slate-800 mb-2">Search</h4>
-                        <p className="text-gray-500 text-sm max-w-[200px]">Find your perfect .lk domain name</p>
+                        <p className="text-gray-500 text-sm max-w-[200px]">Find your perfect <span className="text-blue-800 text-m ">mrt.lk</span> domain name</p>
                     </div>
 
                     {/* Step 2 */}
