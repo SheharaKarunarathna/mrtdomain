@@ -34,7 +34,7 @@ export default function PricingSection() {
                             <span className="text-6xl font-black text-blue-600 tracking-tighter">600</span>
                             <span className="text-xl font-bold text-blue-600 mt-4">LKR</span>
                         </div>
-                        <span className="text-blue-600/60 text-xs font-bold tracking-widest uppercase mt-3 block">One-time payment</span>
+                        <span className="text-blue-600/60 text-xs font-bold tracking-widest uppercase mt-3 block"> Per year</span>
                     </div>
 
                     <ul className="space-y-5 mb-10 flex-1 px-2">
@@ -42,7 +42,7 @@ export default function PricingSection() {
                             "Custom mrt.lk subdomain",
                             "SSL certificate included",
                             "99.9% uptime guarantee",
-                            "Lightweight hosting"
+                            "Custom e-mail addresses included"
                         ].map((item, i) => (
                             <li key={i} className="flex items-center gap-4 text-sm font-medium text-slate-600 group">
                                 <div className="w-6 h-6 rounded-full bg-blue-100 flex items-center justify-center flex-shrink-0 group-hover:bg-blue-600 transition-colors duration-300">
@@ -75,12 +75,13 @@ export default function PricingSection() {
                             <span className="text-5xl font-black text-slate-800 tracking-tighter">2000</span>
                             <span className="text-base font-bold text-slate-500 mt-4">LKR</span>
                         </div>
-                        <span className="text-slate-400 text-xs font-bold tracking-widest uppercase mt-3 block">One-time payment</span>
+                        <span className="text-slate-400 text-xs font-bold tracking-widest uppercase mt-3 block">Per year</span>
                     </div>
 
                     <ul className="space-y-5 mb-10 flex-1 px-2">
-                        {[
-                            "Create sub-subdomains",
+                        {[  
+                            "everything in Subdomain plan",
+                            "Create up to 50 sub-subdomains from your main subdomain",
                             "Management dashboard",
                             "Full API access",
                             "Priority 24/7 support",
@@ -116,7 +117,7 @@ export default function PricingSection() {
                         <div className="flex items-center justify-center gap-1">
                             <span className="text-4xl font-black text-slate-800">Negotiable</span>
                         </div>
-                        <span className="text-slate-400 text-xs font-bold tracking-widest uppercase mt-3 block">Custom Quote</span>
+                        <span className="text-slate-400 text-xs font-bold tracking-widest uppercase mt-3 block">Based on the project</span>
                     </div>
 
                     <ul className="space-y-5 mb-10 flex-1 px-2">

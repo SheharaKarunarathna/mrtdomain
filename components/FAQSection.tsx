@@ -7,16 +7,20 @@ type FAQItem = {
 
 const faqs: FAQItem[] = [
     {
-        question: "Can I sell my subdomain?",
-        answer: "No, subdomains are provided for personal or organizational use and cannot be sold or transferred for profit. They remain the property of the MRT.LK registry."
+        question: "Why buy a .mrt.lk subdomain?",
+        answer: "A .mrt.lk subdomain offers numerous advantages:\n\n• Highly SEO-friendly, perfectly suited for websites related to Moratuwa, helping you rank better in local searches\n\n• Simple and straightforward buying process, no complex letter requests or bureaucratic paperwork required\n\n• Purchase and get hosted within minutes, not hours or days\n\n• Custom email addresses (e.g., contact@yourproject.mrt.lk) included at no extra cost\n\n• We handle DNS-related issues in private networks within the area, so you never have to worry about technical complications\n\n• Reliable and accountable customer service ensures you're always supported throughout your journey"
+    },
+    // {
+    //     question: "Can I sell my subdomain?",
+    //     answer: "No, subdomains are provided for personal or organizational use and cannot be sold or transferred for profit. They remain the property of the MRT.LK registry."
+    // },
+    {
+        question: "How long does setup take?",
+        answer: "Standard subdomain registration is instant after approval. If you request managed hosting, setup typically takes 1-2 hours depending on your specific requirements."
     },
     {
         question: "Can I get hosting with my subdomain?",
         answer: "Yes! While the subdomain itself is free, we offer optional managed hosting packages associated with your domain for a seamless experience. Check out our Hosting & Email section for details."
-    },
-    {
-        question: "How long does setup take?",
-        answer: "Standard subdomain registration is instant after approval. If you request managed hosting, setup typically takes 1-2 hours depending on your specific requirements."
     },
     {
         question: "Can I install WordPress or other apps?",
@@ -90,7 +94,7 @@ export default function FAQSection() {
                                 }`}
                         >
                             <div className="overflow-hidden">
-                                <div className="p-6 md:p-8 pt-0 text-slate-500 leading-relaxed border-t border-slate-50/50">
+                                <div className="p-6 md:p-8 pt-0 text-slate-500 leading-relaxed border-t border-slate-50/50 whitespace-pre-line">
                                     {faq.answer}
                                 </div>
                             </div>

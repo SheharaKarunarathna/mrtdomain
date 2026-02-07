@@ -8,9 +8,23 @@ export default function HostingEmailSection() {
                 <h2 className="text-4xl md:text-5xl font-black text-slate-900 mb-6 tracking-tight">
                     Optional <span className="text-blue-600">Hosting & Email</span>
                 </h2>
-                <p className="text-slate-500 text-lg md:text-xl max-w-3xl mx-auto leading-relaxed">
+                <p className="text-slate-500 text-lg md:text-xl max-w-3xl mx-auto leading-relaxed mb-6">
                     While subdomains are provided by default, you can request managed hosting and email services to elevate your professional online presence.
                 </p>
+                <div className="max-w-4xl mx-auto bg-gradient-to-br from-blue-50 to-indigo-50 border border-blue-200 rounded-2xl p-6 md:p-8">
+                    <h3 className="text-2xl font-bold text-slate-900 mb-4 flex items-center justify-center gap-2">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor" className="w-6 h-6 text-blue-600">
+                            <path strokeLinecap="round" strokeLinejoin="round" d="M21.75 6.75v10.5a2.25 2.25 0 01-2.25 2.25h-15a2.25 2.25 0 01-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0019.5 4.5h-15a2.25 2.25 0 00-2.25 2.25m19.5 0v.243a2.25 2.25 0 01-1.07 1.916l-7.5 4.615a2.25 2.25 0 01-2.36 0L3.32 8.91a2.25 2.25 0 01-1.07-1.916V6.75" />
+                        </svg>
+                        Custom Email Addresses Included
+                    </h3>
+                    <p className="text-slate-700 leading-relaxed mb-4">
+                        Every <span className="font-mono font-semibold text-blue-700">mrt.lk</span> subdomain purchase comes with professional custom email addresses at no extra cost. Create up to 5 personalized email accounts like <span className="font-mono text-sm bg-white px-2 py-1 rounded border border-blue-200">info@yourproject.mrt.lk</span>, <span className="font-mono text-sm bg-white px-2 py-1 rounded border border-blue-200">team@yourproject.mrt.lk</span>, or <span className="font-mono text-sm bg-white px-2 py-1 rounded border border-blue-200">contact@yourproject.mrt.lk</span>.
+                    </p>
+                    <p className="text-slate-700 leading-relaxed">
+                        Perfect for student organizations, project teams, or professional portfolios, these email addresses enhance your credibility and provide a unified brand identity. Access your emails through webmail or configure them with your favorite email client (Gmail, Outlook, Thunderbird, etc.).
+                    </p>
+                </div>
             </div>
 
             {/* Features Grid */}
@@ -36,7 +50,7 @@ export default function HostingEmailSection() {
                     },
                     {
                         title: "Email Accounts",
-                        desc: "Professional 1-5 email accounts per domain setup.",
+                        desc: "1-5 professional email accounts included with every subdomain at no extra cost.",
                         icon: (
                             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-8 h-8 text-blue-600">
                                 <path strokeLinecap="round" strokeLinejoin="round" d="M16.5 12a4.5 4.5 0 11-9 0 4.5 4.5 0 019 0zm0 0c0 1.657 1.007 3 2.25 3S21 13.657 21 12a9 9 0 10-2.636 6.364M16.5 12V8.25" />

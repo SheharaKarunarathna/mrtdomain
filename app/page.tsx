@@ -12,7 +12,7 @@ import RequestForm from "@/components/RequestForm";
 export default function Home() {
   const [displayedText, setDisplayedText] = useState("");
   const [isFormOpen, setIsFormOpen] = useState(false);
-  const fullText = "Then Hurry up! Reserve your mrt.lk subdomain now!";
+  const fullText = "Then Hurry up! Reserve your .mrt.lk subdomain now!";
 
   useEffect(() => {
     let currentIndex = 0;
@@ -119,8 +119,11 @@ export default function Home() {
         {/* Description Paragraph */}
       </div>
       <div className="relative flex flex-col px-6 md:pl-[5%] md:pr-8 py-20">
-        <p className="text-lg md:text-3xl text-blue-800 max-w-7xl leading-relaxed mb-12 text-center mx-auto">
-          Elevate your digital footprint with a specialized <span className="font-mono text-gray-600 font-bold">mrt.lk</span> subdomain. Designed for the innovators of Moratuwa, our platform offers the perfect home for your next big project, student organization, or professional portfolio.
+        <p className="text-lg md:text-3xl text-blue-800 max-w-7xl leading-relaxed mb-8 text-center mx-auto">
+          Elevate your digital footprint with a specialized <span className="font-mono text-gray-600 font-bold">.mrt.lk</span> subdomain. Designed for the innovators of Moratuwa, our platform offers the perfect home for your next big project, student organization, or professional portfolio.
+        </p>
+        <p className="text-base md:text-xl text-slate-700 max-w-6xl leading-relaxed mb-12 text-center mx-auto">
+          Now includes a full suite of <span className="font-semibold text-blue-700">custom email addresses</span> (e.g., <span className="font-mono text-sm text-gray-600">contact@yourproject.mrt.lk</span>) with every purchase to give your brand a truly professional edge.
         </p>
         {/* <div className="w-10 h-10 bg-slate-900 rounded-full flex items-center justify-center text-white font-bold text-sm">
           
