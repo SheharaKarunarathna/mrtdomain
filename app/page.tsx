@@ -1,5 +1,7 @@
 "use client";
 import { useState, useEffect } from "react";
+import { User } from '@supabase/supabase-js';
+import { supabase } from '@/app/utils/supabase';
 import SearchComponent from "@/components/SearchComponent";
 import FeatureCards from "@/components/FeatureCards";
 import RequestButton from "@/components/RequestButton";
@@ -8,11 +10,37 @@ import PricingSection from "@/components/PricingSection";
 import HostingEmailSection from "@/components/HostingEmailSection";
 import FAQSection from "@/components/FAQSection";
 import RequestForm from "@/components/RequestForm";
+import LoginModal from "@/components/login";
 
 export default function Home() {
   const [displayedText, setDisplayedText] = useState("");
   const [isFormOpen, setIsFormOpen] = useState(false);
+  const [isLoginOpen, setIsLoginOpen] = useState(false);
+  const [user, setUser] = useState<User | null>(null);
   const fullText = "Then Hurry up! Reserve your .mrt.lk subdomain now!";
+
+  // Check if user is already logged in
+  useEffect(() => {
+    const getUser = async () => {
+      const { data: { session } } = await supabase.auth.getSession();
+      if (session) {
+        setUser(session.user);
+      }
+    };
+    getUser();
+
+    // Listen for auth state changes
+    const { data: { subscription } } = supabase.auth.onAuthStateChange((_event, session) => {
+      setUser(session?.user ?? null);
+    });
+
+    return () => subscription.unsubscribe();
+  }, []);
+
+  const handleLogout = async () => {
+    await supabase.auth.signOut();
+    setUser(null);
+  };
 
   useEffect(() => {
     let currentIndex = 0;
@@ -65,10 +93,37 @@ export default function Home() {
 
       {/* Top Right Navigation */}
       <div className="absolute top-8 right-8 z-20 flex items-center gap-4">
-        {/* Sign In Button */}
-        <button className="px-6 py-2 bg-white text-blue-600 font-bold rounded-lg shadow-sm hover:shadow-md transition-all hover:scale-105 active:scale-95 text-sm uppercase tracking-wide border border-blue-100">
-          Sign In
-        </button>
+        {/* Sign In Button or User Info */}
+        {user ? (
+          <div className="flex items-center gap-3 bg-white px-4 py-2 rounded-lg shadow-sm">
+            {user.user_metadata?.avatar_url && (
+              <img 
+                src={user.user_metadata.avatar_url} 
+                alt="Avatar" 
+                className="w-8 h-8 rounded-full"
+              />
+            )}
+            <span className="text-sm font-semibold text-gray-800">
+              {user.user_metadata?.full_name || user.email}
+            </span>
+            <button
+              onClick={handleLogout}
+              className="ml-2 text-xs text-gray-500 hover:text-red-600 transition-colors"
+              title="Sign Out"
+            >
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-5 h-5">
+                <path strokeLinecap="round" strokeLinejoin="round" d="M15.75 9V5.25A2.25 2.25 0 0013.5 3h-6a2.25 2.25 0 00-2.25 2.25v13.5A2.25 2.25 0 007.5 21h6a2.25 2.25 0 002.25-2.25V15M12 9l-3 3m0 0l3 3m-3-3h12.75" />
+              </svg>
+            </button>
+          </div>
+        ) : (
+          <button
+            onClick={() => setIsLoginOpen(true)}
+            className="px-6 py-2 bg-white text-blue-600 font-bold rounded-lg shadow-sm hover:shadow-md transition-all hover:scale-105 active:scale-95 text-sm uppercase tracking-wide border border-blue-100"
+          >
+            Sign In
+          </button>
+        )}
 
         {/* Theme Toggle (Visual only) */}
         <div className="bg-white/80 p-2 rounded-full cursor-pointer hover:bg-white transition-colors">
@@ -146,6 +201,13 @@ export default function Home() {
 
       {/* Request Form Modal */}
       {isFormOpen && <RequestForm onClose={() => setIsFormOpen(false)} />}
+      
+      {/* Login Modal */}
+      <LoginModal 
+        isOpen={isLoginOpen} 
+        onClose={() => setIsLoginOpen(false)}
+        onLoginSuccess={(user) => setUser(user)}
+      />
     </div>
   );
 }
