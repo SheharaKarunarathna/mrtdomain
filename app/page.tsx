@@ -198,7 +198,7 @@ export default function Home() {
         {/* Search Bar (Centered/Adjusted) */}
         <div className="flex flex-col md:flex-row items-center gap-4 max-w-4xl w-full mb-12">
           <div className="flex-1 w-full max-w-2xl">
-            <SearchComponent />
+            <SearchComponent onLoginRequired={() => setIsLoginOpen(true)} />
           </div>
         </div>
 

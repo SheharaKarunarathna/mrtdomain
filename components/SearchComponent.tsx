@@ -1,12 +1,14 @@
 "use client";
 
 import { useState } from "react";
-import { useRouter } from "next/navigation";
 import { supabase } from "@/lib/supabase";
 import RequestForm from "./RequestForm";
 
-export default function SearchComponent() {
-    const router = useRouter();
+interface SearchComponentProps {
+    onLoginRequired?: () => void;
+}
+
+export default function SearchComponent({ onLoginRequired }: SearchComponentProps) {
     const [searchTerm, setSearchTerm] = useState("");
     const [status, setStatus] = useState<"idle" | "loading" | "available" | "occupied" | "pending_request">("idle");
     const [searchedName, setSearchedName] = useState("");
@@ -75,9 +77,10 @@ export default function SearchComponent() {
             console.log("User is logged in, opening request form");
             setIsFormOpen(true);
         } else {
-            console.log("User not logged in, redirecting to signin");
-            // Optionally pass the domain as a query param to return here later
-            router.push(`/signin?returnTo=search&domain=${searchedName}`);
+            console.log("User not logged in, opening login modal");
+            if (onLoginRequired) {
+                onLoginRequired();
+            }
         }
     };
 
