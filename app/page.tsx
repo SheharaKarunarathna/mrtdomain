@@ -16,6 +16,7 @@ export default function Home() {
   const [displayedText, setDisplayedText] = useState("");
   const [isFormOpen, setIsFormOpen] = useState(false);
   const [isLoginOpen, setIsLoginOpen] = useState(false);
+  const [isUserMenuOpen, setIsUserMenuOpen] = useState(false);
   const [user, setUser] = useState<User | null>(null);
   const fullText = "Then Hurry up! Reserve your .mrt.lk subdomain now!";
 
@@ -40,6 +41,7 @@ export default function Home() {
   const handleLogout = async () => {
     await supabase.auth.signOut();
     setUser(null);
+    setIsUserMenuOpen(false);
   };
 
   useEffect(() => {
@@ -95,26 +97,47 @@ export default function Home() {
       <div className="absolute top-8 right-8 z-20 flex items-center gap-4">
         {/* Sign In Button or User Info */}
         {user ? (
-          <div className="flex items-center gap-3 bg-white px-4 py-2 rounded-lg shadow-sm">
-            {user.user_metadata?.avatar_url && (
-              <img 
-                src={user.user_metadata.avatar_url} 
-                alt="Avatar" 
-                className="w-8 h-8 rounded-full"
-              />
-            )}
-            <span className="text-sm font-semibold text-gray-800">
-              {user.user_metadata?.full_name || user.email}
-            </span>
+          <div className="relative">
             <button
-              onClick={handleLogout}
-              className="ml-2 text-xs text-gray-500 hover:text-red-600 transition-colors"
-              title="Sign Out"
+              onClick={() => setIsUserMenuOpen(!isUserMenuOpen)}
+              className="flex items-center gap-3 bg-white px-4 py-2 rounded-lg shadow-sm hover:shadow-md transition-all cursor-pointer"
             >
-              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-5 h-5">
-                <path strokeLinecap="round" strokeLinejoin="round" d="M15.75 9V5.25A2.25 2.25 0 0013.5 3h-6a2.25 2.25 0 00-2.25 2.25v13.5A2.25 2.25 0 007.5 21h6a2.25 2.25 0 002.25-2.25V15M12 9l-3 3m0 0l3 3m-3-3h12.75" />
+              {user.user_metadata?.avatar_url && (
+                <img 
+                  src={user.user_metadata.avatar_url} 
+                  alt="Avatar" 
+                  className="w-8 h-8 rounded-full"
+                />
+              )}
+              <span className="text-sm font-semibold text-gray-800">
+                {user.user_metadata?.full_name || user.email}
+              </span>
+              <svg 
+                xmlns="http://www.w3.org/2000/svg" 
+                fill="none" 
+                viewBox="0 0 24 24" 
+                strokeWidth={2} 
+                stroke="currentColor" 
+                className={`w-4 h-4 text-gray-500 transition-transform ${isUserMenuOpen ? 'rotate-180' : ''}`}
+              >
+                <path strokeLinecap="round" strokeLinejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5" />
               </svg>
             </button>
+
+            {/* Dropdown Menu */}
+            {isUserMenuOpen && (
+              <div className="absolute right-0 mt-2 w-48 bg-white rounded-lg shadow-lg py-2 border border-gray-100">
+                <button
+                  onClick={handleLogout}
+                  className="w-full px-4 py-2 text-left text-sm text-red-600 hover:bg-red-50 transition-colors flex items-center gap-2"
+                >
+                  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-5 h-5">
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M15.75 9V5.25A2.25 2.25 0 0013.5 3h-6a2.25 2.25 0 00-2.25 2.25v13.5A2.25 2.25 0 007.5 21h6a2.25 2.25 0 002.25-2.25V15M12 9l-3 3m0 0l3 3m-3-3h12.75" />
+                  </svg>
+                  LOG OUT
+                </button>
+              </div>
+            )}
           </div>
         ) : (
           <button
