@@ -12,6 +12,14 @@ export default function RequestForm({ onClose, price = "600.00" }: RequestFormPr
     const [submitStatus, setSubmitStatus] = useState<"idle" | "success" | "error">("idle");
     const [errorMessage, setErrorMessage] = useState("");
 
+    useEffect(() => {
+        // Lock body scroll when modal is open
+        document.body.style.overflow = 'hidden';
+        return () => {
+            document.body.style.overflow = 'unset';
+        };
+    }, []);
+
     // Form fields
     const [fullName, setFullName] = useState("");
     const [subdomain, setSubdomain] = useState("");
@@ -115,13 +123,13 @@ export default function RequestForm({ onClose, price = "600.00" }: RequestFormPr
         <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
             {/* Backdrop */}
             <div
-                className="absolute inset-0 bg-[#e0f2fe]/80 backdrop-blur-sm transition-opacity"
+                className="absolute inset-0 bg-slate-900/40 backdrop-blur-md transition-opacity"
                 onClick={onClose}
             />
 
             {/* Form Card */}
-            <div className="relative w-full max-w-xl bg-white rounded-2xl shadow-2xl overflow-hidden animate-in fade-in zoom-in duration-300">
-                <div className="max-h-[85vh] overflow-y-auto p-8 md:p-10">
+            <div className="relative w-full max-w-xl bg-white rounded-2xl shadow-2xl overflow-hidden animate-in fade-in zoom-in duration-300 flex flex-col max-h-[90vh]">
+                <div className="overflow-y-auto p-8 md:p-10 pb-20">
 
                     {/* Header */}
                     <div className="text-center mb-8">

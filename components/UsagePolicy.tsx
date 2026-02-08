@@ -1,11 +1,11 @@
 "use client";
 import React from 'react';
 
-interface UsagePolicyProps {
-    onRequestClick: () => void;
-}
+export default function UsagePolicy() {
+    const scrollToTop = () => {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    };
 
-export default function UsagePolicy({ onRequestClick }: UsagePolicyProps) {
     return (
         <section className="py-24 px-6 md:px-0 relative z-10 w-full max-w-4xl mx-auto">
             <div className="mb-12">
@@ -52,10 +52,13 @@ export default function UsagePolicy({ onRequestClick }: UsagePolicyProps) {
             </div>
 
             <button
-                onClick={onRequestClick}
-                className="bg-[#0B3D75] hover:bg-[#093260] text-white font-bold py-4 px-8 rounded-xl shadow-lg hover:shadow-xl transition-all transform active:scale-95 tracking-wide uppercase text-sm"
+                onClick={scrollToTop}
+                className="bg-slate-900 hover:bg-black text-white font-bold py-4 px-10 rounded-xl shadow-lg hover:shadow-xl transition-all transform active:scale-95 tracking-wide uppercase text-sm flex items-center gap-2 group"
             >
-                Request Your Subdomain
+                <span>Back to Top</span>
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2.5} stroke="currentColor" className="w-4 h-4 transition-transform group-hover:-translate-y-1">
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M4.5 15.75l7.5-7.5 7.5 7.5" />
+                </svg>
             </button>
         </section>
     );

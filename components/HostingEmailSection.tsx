@@ -92,9 +92,14 @@ export default function HostingEmailSection() {
 
             {/* CTA Button */}
             <div className="text-center">
-                <button className="px-10 py-5 bg-blue-600 hover:bg-blue-700 text-white font-bold rounded-xl shadow-lg hover:shadow-blue-200 transition-all transform hover:scale-[1.02] active:scale-[0.98] text-lg">
+                <a
+                    href="https://wa.me/94771595616"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-block px-10 py-5 bg-blue-600 hover:bg-blue-700 text-white font-bold rounded-xl shadow-lg hover:shadow-blue-200 transition-all transform hover:scale-[1.02] active:scale-[0.98] text-lg"
+                >
                     Request Managed Hosting
-                </button>
+                </a>
             </div>
         </section>
     );

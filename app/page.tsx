@@ -117,21 +117,21 @@ export default function Home() {
               className="flex items-center gap-3 bg-white px-4 py-2 rounded-lg shadow-sm hover:shadow-md transition-all cursor-pointer"
             >
               {user.user_metadata?.avatar_url && (
-                <img 
-                  src={user.user_metadata.avatar_url} 
-                  alt="Avatar" 
+                <img
+                  src={user.user_metadata.avatar_url}
+                  alt="Avatar"
                   className="w-8 h-8 rounded-full"
                 />
               )}
               <span className="text-sm font-semibold text-gray-800">
                 {user.user_metadata?.full_name || user.email}
               </span>
-              <svg 
-                xmlns="http://www.w3.org/2000/svg" 
-                fill="none" 
-                viewBox="0 0 24 24" 
-                strokeWidth={2} 
-                stroke="currentColor" 
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                strokeWidth={2}
+                stroke="currentColor"
                 className={`w-4 h-4 text-gray-500 transition-transform ${isUserMenuOpen ? 'rotate-180' : ''}`}
               >
                 <path strokeLinecap="round" strokeLinejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5" />
@@ -161,13 +161,6 @@ export default function Home() {
             Sign In
           </button>
         )}
-
-        {/* Theme Toggle (Visual only) */}
-        <div className="bg-white/80 p-2 rounded-full cursor-pointer hover:bg-white transition-colors">
-          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6 text-slate-800">
-            <path strokeLinecap="round" strokeLinejoin="round" d="M12 3v2.25m6.364.386l-1.591 1.591M21 12h-2.25m-.386 6.364l-1.591-1.591M12 18.75V21m-4.773-4.227l-1.591 1.591M5.25 12H3m4.227-4.773L5.636 5.636M15.75 12a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0z" />
-          </svg>
-        </div>
       </div>
 
       {/* Main Content */}
@@ -233,10 +226,7 @@ export default function Home() {
         <PricingSection onSelectPlan={handlePlanSelect} />
         <HostingEmailSection />
         <FAQSection />
-        <UsagePolicy onRequestClick={() => {
-          setSelectedPrice("600.00");
-          setIsFormOpen(true);
-        }} />
+        <UsagePolicy />
       </div>
       {/* Feature Section (Pushed below fold) */}
 
@@ -252,10 +242,10 @@ export default function Home() {
           }}
         />
       )}
-      
+
       {/* Login Modal */}
-      <LoginModal 
-        isOpen={isLoginOpen} 
+      <LoginModal
+        isOpen={isLoginOpen}
         onClose={() => setIsLoginOpen(false)}
         onLoginSuccess={(user) => setUser(user)}
       />
