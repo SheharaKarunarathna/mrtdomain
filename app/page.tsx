@@ -1,7 +1,6 @@
 "use client";
 import { useState, useEffect } from "react";
 import { User } from '@supabase/supabase-js';
-import Link from "next/link";
 import { supabase } from "@/lib/supabase";
 import SearchComponent from "@/components/SearchComponent";
 import FeatureCards from "@/components/FeatureCards";
@@ -155,20 +154,12 @@ export default function Home() {
             )}
           </div>
         ) : (
-          <>
-            <button
-              onClick={() => setIsLoginOpen(true)}
-              className="px-6 py-2 bg-white text-blue-600 font-bold rounded-lg shadow-sm hover:shadow-md transition-all hover:scale-105 active:scale-95 text-sm uppercase tracking-wide border border-blue-100"
-            >
-              Sign In (Modal)
-            </button>
-            <Link
-              href="/signin"
-              className="px-6 py-2 bg-white text-blue-600 font-bold rounded-lg shadow-sm hover:shadow-md transition-all hover:scale-105 active:scale-95 text-sm uppercase tracking-wide border border-blue-100"
-            >
-              Sign In (Page)
-            </Link>
-          </>
+          <button
+            onClick={() => setIsLoginOpen(true)}
+            className="px-6 py-2 bg-white text-blue-600 font-bold rounded-lg shadow-sm hover:shadow-md transition-all hover:scale-105 active:scale-95 text-sm uppercase tracking-wide border border-blue-100"
+          >
+            Sign In
+          </button>
         )}
 
         {/* Theme Toggle (Visual only) */}
