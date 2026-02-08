@@ -1,7 +1,8 @@
 "use client";
 import { useState, useEffect } from "react";
 import { User } from '@supabase/supabase-js';
-import { supabase } from '@/app/utils/supabase';
+import Link from "next/link";
+import { supabase } from "@/lib/supabase";
 import SearchComponent from "@/components/SearchComponent";
 import FeatureCards from "@/components/FeatureCards";
 import RequestButton from "@/components/RequestButton";
@@ -11,6 +12,8 @@ import HostingEmailSection from "@/components/HostingEmailSection";
 import FAQSection from "@/components/FAQSection";
 import RequestForm from "@/components/RequestForm";
 import LoginModal from "@/components/login";
+import UsagePolicy from "@/components/UsagePolicy";
+import ContactButton from "@/components/ContactButton";
 
 export default function Home() {
   const [displayedText, setDisplayedText] = useState("");
@@ -18,33 +21,20 @@ export default function Home() {
   const [isLoginOpen, setIsLoginOpen] = useState(false);
   const [isUserMenuOpen, setIsUserMenuOpen] = useState(false);
   const [user, setUser] = useState<User | null>(null);
-  const fullText = "Then Hurry up! Reserve your .mrt.lk subdomain now!";
+  const [selectedPrice, setSelectedPrice] = useState("600.00");
+  const fullText = "Then Hurry up! Reserve your mrt.lk subdomain now!";
 
-  // Check if user is already logged in
   useEffect(() => {
-    const getUser = async () => {
-      const { data: { session } } = await supabase.auth.getSession();
-      if (session) {
-        setUser(session.user);
-      }
-    };
-    getUser();
+    // Check initial session
+    supabase.auth.getSession().then(({ data: { session } }) => {
+      setUser(session?.user ?? null);
+    });
 
-    // Listen for auth state changes
+    // Listen for auth changes
     const { data: { subscription } } = supabase.auth.onAuthStateChange((_event, session) => {
       setUser(session?.user ?? null);
     });
 
-    return () => subscription.unsubscribe();
-  }, []);
-
-  const handleLogout = async () => {
-    await supabase.auth.signOut();
-    setUser(null);
-    setIsUserMenuOpen(false);
-  };
-
-  useEffect(() => {
     let currentIndex = 0;
     const typingInterval = setInterval(() => {
       if (currentIndex <= fullText.length) {
@@ -55,8 +45,29 @@ export default function Home() {
       }
     }, 50);
 
-    return () => clearInterval(typingInterval);
+    return () => {
+      clearInterval(typingInterval);
+      subscription.unsubscribe();
+    };
   }, []);
+
+  const handlePlanSelect = async (planName: string, price: string) => {
+    const { data: { session } } = await supabase.auth.getSession();
+
+    if (session) {
+      setSelectedPrice(price);
+      setIsFormOpen(true);
+    } else {
+      // Redirect to signin with returnTo info
+      window.location.href = `/signin?returnTo=page&plan=${planName}&price=${price}`;
+    }
+  };
+
+  const handleLogout = async () => {
+    await supabase.auth.signOut();
+    setUser(null);
+    setIsUserMenuOpen(false);
+  };
 
   const renderStyledText = (text: string) => {
     const parts = text.split("mrt.lk");
@@ -77,6 +88,10 @@ export default function Home() {
       );
     }
     return text;
+  };
+
+  const handleSignOut = async () => {
+    await supabase.auth.signOut();
   };
 
   return (
@@ -140,12 +155,20 @@ export default function Home() {
             )}
           </div>
         ) : (
-          <button
-            onClick={() => setIsLoginOpen(true)}
-            className="px-6 py-2 bg-white text-blue-600 font-bold rounded-lg shadow-sm hover:shadow-md transition-all hover:scale-105 active:scale-95 text-sm uppercase tracking-wide border border-blue-100"
-          >
-            Sign In
-          </button>
+          <>
+            <button
+              onClick={() => setIsLoginOpen(true)}
+              className="px-6 py-2 bg-white text-blue-600 font-bold rounded-lg shadow-sm hover:shadow-md transition-all hover:scale-105 active:scale-95 text-sm uppercase tracking-wide border border-blue-100"
+            >
+              Sign In (Modal)
+            </button>
+            <Link
+              href="/signin"
+              className="px-6 py-2 bg-white text-blue-600 font-bold rounded-lg shadow-sm hover:shadow-md transition-all hover:scale-105 active:scale-95 text-sm uppercase tracking-wide border border-blue-100"
+            >
+              Sign In (Page)
+            </Link>
+          </>
         )}
 
         {/* Theme Toggle (Visual only) */}
@@ -216,14 +239,28 @@ export default function Home() {
       <div className="flex flex-col gap-1/10">
         <FeatureCards />
         <ProcessFlow />
-        <PricingSection />
+        <PricingSection onSelectPlan={handlePlanSelect} />
         <HostingEmailSection />
         <FAQSection />
+        <UsagePolicy onRequestClick={() => {
+          setSelectedPrice("600.00");
+          setIsFormOpen(true);
+        }} />
       </div>
       {/* Feature Section (Pushed below fold) */}
 
+      <ContactButton />
+
       {/* Request Form Modal */}
-      {isFormOpen && <RequestForm onClose={() => setIsFormOpen(false)} />}
+      {isFormOpen && (
+        <RequestForm
+          price={selectedPrice}
+          onClose={() => {
+            setIsFormOpen(false);
+            setSelectedPrice("600.00");
+          }}
+        />
+      )}
       
       {/* Login Modal */}
       <LoginModal 
@@ -232,5 +269,6 @@ export default function Home() {
         onLoginSuccess={(user) => setUser(user)}
       />
     </div>
+
   );
 }

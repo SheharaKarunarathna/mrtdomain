@@ -1,6 +1,8 @@
-import React from 'react';
+interface PricingSectionProps {
+    onSelectPlan?: (planName: string, price: string) => void;
+}
 
-export default function PricingSection() {
+export default function PricingSection({ onSelectPlan }: PricingSectionProps) {
     return (
         <section className="py-24 px-6 md:px-0 relative z-10 w-full max-w-7xl mx-auto">
             <div className="text-center mb-16">
@@ -55,7 +57,10 @@ export default function PricingSection() {
                         ))}
                     </ul>
 
-                    <button className="w-full bg-blue-600 hover:bg-blue-500 text-white font-bold py-5 rounded-2xl shadow-blue-200 shadow-xl hover:shadow-2xl transition-all transform active:scale-95 uppercase tracking-wide text-sm">
+                    <button
+                        onClick={() => onSelectPlan?.("Subdomain", "600.00")}
+                        className="w-full bg-blue-600 hover:bg-blue-500 text-white font-bold py-5 rounded-2xl shadow-blue-200 shadow-xl hover:shadow-2xl transition-all transform active:scale-95 uppercase tracking-wide text-sm"
+                    >
                         Purchase now
                     </button>
                 </div>
@@ -98,7 +103,10 @@ export default function PricingSection() {
                         ))}
                     </ul>
 
-                    <button className="w-full bg-white hover:bg-slate-50 text-slate-700 font-bold py-5 rounded-2xl border-2 border-slate-200 hover:border-blue-400 hover:text-blue-600 transition-all uppercase tracking-wide text-sm">
+                    <button
+                        onClick={() => onSelectPlan?.("Network", "2000.00")}
+                        className="w-full bg-white hover:bg-slate-50 text-slate-700 font-bold py-5 rounded-2xl border-2 border-slate-200 hover:border-blue-400 hover:text-blue-600 transition-all uppercase tracking-wide text-sm"
+                    >
                         Purchase now
                     </button>
                 </div>
@@ -138,7 +146,10 @@ export default function PricingSection() {
                         ))}
                     </ul>
 
-                    <button className="w-full bg-white hover:bg-slate-50 text-slate-700 font-bold py-5 rounded-2xl border-2 border-slate-200 hover:border-purple-400 hover:text-purple-600 transition-all uppercase tracking-wide text-sm">
+                    <button
+                        onClick={() => onSelectPlan?.("Development", "Negotiable")}
+                        className="w-full bg-white hover:bg-slate-50 text-slate-700 font-bold py-5 rounded-2xl border-2 border-slate-200 hover:border-purple-400 hover:text-purple-600 transition-all uppercase tracking-wide text-sm"
+                    >
                         Contact Sales
                     </button>
                 </div>
