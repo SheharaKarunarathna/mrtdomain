@@ -34,6 +34,10 @@ export default function LoginModal({ isOpen, onClose, onLoginSuccess }: LoginMod
       if (session?.user) {
         onLoginSuccess(session.user)
         onClose()
+        // Remove the trailing # from the URL after OAuth redirect
+        if (window.location.hash === '' || window.location.hash === '#') {
+          window.history.replaceState(null, '', window.location.pathname + window.location.search)
+        }
       }
     })
 
