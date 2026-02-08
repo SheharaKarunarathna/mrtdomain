@@ -26,7 +26,6 @@ export default function RequestForm({ onClose, price = "600.00" }: RequestFormPr
     const [description, setDescription] = useState("");
     const [email, setEmail] = useState("");
     const [phone, setPhone] = useState("");
-    const [hosting, setHosting] = useState("No, just the subdomain");
     const [specialReqs, setSpecialReqs] = useState("");
     const [bankSlip, setBankSlip] = useState<File | null>(null);
 
@@ -77,9 +76,9 @@ export default function RequestForm({ onClose, price = "600.00" }: RequestFormPr
                     description: description,
                     email: email,
                     phone: phone,
-                    hosting_requirement: hosting,
                     special_requirements: specialReqs,
                     bank_slip_url: bankSlipUrl,
+                    price: price === "Negotiable" ? 0 : parseFloat(price),
                     status: 'pending'
                 });
 
@@ -135,7 +134,7 @@ export default function RequestForm({ onClose, price = "600.00" }: RequestFormPr
                     <div className="text-center mb-8">
                         <h2 className="text-3xl font-black text-slate-900 mb-4">Request Your Subdomain</h2>
                         <p className="text-slate-500 text-sm leading-relaxed">
-                            Our subdomains are provided on request. Hosting and email accounts are available for an additional fee, based on your requirements.
+                            Our subdomains are provided on request. Please fill out the form below to initiate your registration.
                         </p>
                     </div>
 
@@ -211,27 +210,6 @@ export default function RequestForm({ onClose, price = "600.00" }: RequestFormPr
                             />
                         </div>
 
-                        {/* Hosting Required */}
-                        <div>
-                            <label className="block text-sm font-bold text-blue-900 mb-1.5">Hosting/Email Required?</label>
-                            <div className="relative">
-                                <select
-                                    value={hosting}
-                                    onChange={(e) => setHosting(e.target.value)}
-                                    className="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-lg text-slate-700 outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-100 transition-all appearance-none cursor-pointer"
-                                >
-                                    <option>No, just the subdomain</option>
-                                    <option>Yes, I need hosting</option>
-                                    <option>Yes, I need email</option>
-                                    <option>Yes, both hosting & email</option>
-                                </select>
-                                <div className="absolute right-4 top-1/2 -translate-y-1/2 pointer-events-none text-slate-500">
-                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor" className="w-4 h-4">
-                                        <path strokeLinecap="round" strokeLinejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5" />
-                                    </svg>
-                                </div>
-                            </div>
-                        </div>
 
                         {/* Special Requirements */}
                         <div>
