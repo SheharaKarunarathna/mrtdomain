@@ -32,6 +32,10 @@ export default function Home() {
     // Listen for auth changes
     const { data: { subscription } } = supabase.auth.onAuthStateChange((_event, session) => {
       setUser(session?.user ?? null);
+      // Remove the trailing # from the URL after OAuth redirect
+      if (window.location.hash === '' || window.location.hash === '#') {
+        window.history.replaceState(null, '', window.location.pathname + window.location.search);
+      }
     });
 
     let currentIndex = 0;
