@@ -53,6 +53,17 @@ export default function LoginModal({ isOpen, onClose, onLoginSuccess }: LoginMod
     return () => subscription.unsubscribe()
   }, [onLoginSuccess, onClose])
 
+  // Reset loading state when page regains visibility (e.g. user navigates back from OAuth)
+  useEffect(() => {
+    const handleVisibilityChange = () => {
+      if (document.visibilityState === 'visible') {
+        setLoadingProvider(null)
+      }
+    }
+    document.addEventListener('visibilitychange', handleVisibilityChange)
+    return () => document.removeEventListener('visibilitychange', handleVisibilityChange)
+  }, [])
+
   // Lock body scroll when modal is open
   useEffect(() => {
     if (isOpen) {
