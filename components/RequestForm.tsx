@@ -5,9 +5,10 @@ import { supabase } from "@/lib/supabase";
 interface RequestFormProps {
     onClose: () => void;
     price?: string;
+    initialSubdomain?: string;
 }
 
-export default function RequestForm({ onClose, price = "600.00" }: RequestFormProps) {
+export default function RequestForm({ onClose, price = "600.00", initialSubdomain = "" }: RequestFormProps) {
     const [isSubmitting, setIsSubmitting] = useState(false);
     const [submitStatus, setSubmitStatus] = useState<"idle" | "success" | "error">("idle");
     const [errorMessage, setErrorMessage] = useState("");
@@ -22,7 +23,7 @@ export default function RequestForm({ onClose, price = "600.00" }: RequestFormPr
 
     // Form fields
     const [fullName, setFullName] = useState("");
-    const [subdomain, setSubdomain] = useState("");
+    const [subdomain, setSubdomain] = useState(initialSubdomain);
     const [description, setDescription] = useState("");
     const [email, setEmail] = useState("");
     const [phone, setPhone] = useState("");

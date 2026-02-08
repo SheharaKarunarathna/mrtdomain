@@ -166,6 +166,7 @@ export default function SearchComponent() {
                 <RequestForm
                     price="600.00"
                     onClose={() => setIsFormOpen(false)}
+                    initialSubdomain={searchedName.replace('.mrt.lk', '')}
                 />
             )}
         </div>
