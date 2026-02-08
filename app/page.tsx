@@ -1,5 +1,6 @@
 "use client";
 import { useState, useEffect } from "react";
+import Link from "next/link";
 import SearchComponent from "@/components/SearchComponent";
 import FeatureCards from "@/components/FeatureCards";
 import RequestButton from "@/components/RequestButton";
@@ -66,9 +67,12 @@ export default function Home() {
       {/* Top Right Navigation */}
       <div className="absolute top-8 right-8 z-20 flex items-center gap-4">
         {/* Sign In Button */}
-        <button className="px-6 py-2 bg-white text-blue-600 font-bold rounded-lg shadow-sm hover:shadow-md transition-all hover:scale-105 active:scale-95 text-sm uppercase tracking-wide border border-blue-100">
+        <Link
+          href="/signin"
+          className="px-6 py-2 bg-white text-blue-600 font-bold rounded-lg shadow-sm hover:shadow-md transition-all hover:scale-105 active:scale-95 text-sm uppercase tracking-wide border border-blue-100"
+        >
           Sign In
-        </button>
+        </Link>
 
         {/* Theme Toggle (Visual only) */}
         <div className="bg-white/80 p-2 rounded-full cursor-pointer hover:bg-white transition-colors">
