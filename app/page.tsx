@@ -1,6 +1,7 @@
 "use client";
 import { useState, useEffect } from "react";
 import Link from "next/link";
+import { supabase } from "@/lib/supabase";
 import SearchComponent from "@/components/SearchComponent";
 import FeatureCards from "@/components/FeatureCards";
 import RequestButton from "@/components/RequestButton";
@@ -9,13 +10,27 @@ import PricingSection from "@/components/PricingSection";
 import HostingEmailSection from "@/components/HostingEmailSection";
 import FAQSection from "@/components/FAQSection";
 import RequestForm from "@/components/RequestForm";
+import UsagePolicy from "@/components/UsagePolicy";
+import ContactButton from "@/components/ContactButton";
 
 export default function Home() {
   const [displayedText, setDisplayedText] = useState("");
   const [isFormOpen, setIsFormOpen] = useState(false);
+  const [user, setUser] = useState<any>(null);
+  const [selectedPrice, setSelectedPrice] = useState("600.00");
   const fullText = "Then Hurry up! Reserve your mrt.lk subdomain now!";
 
   useEffect(() => {
+    // Check initial session
+    supabase.auth.getSession().then(({ data: { session } }) => {
+      setUser(session?.user ?? null);
+    });
+
+    // Listen for auth changes
+    const { data: { subscription } } = supabase.auth.onAuthStateChange((_event, session) => {
+      setUser(session?.user ?? null);
+    });
+
     let currentIndex = 0;
     const typingInterval = setInterval(() => {
       if (currentIndex <= fullText.length) {
@@ -26,8 +41,23 @@ export default function Home() {
       }
     }, 50);
 
-    return () => clearInterval(typingInterval);
+    return () => {
+      clearInterval(typingInterval);
+      subscription.unsubscribe();
+    };
   }, []);
+
+  const handlePlanSelect = async (planName: string, price: string) => {
+    const { data: { session } } = await supabase.auth.getSession();
+
+    if (session) {
+      setSelectedPrice(price);
+      setIsFormOpen(true);
+    } else {
+      // Redirect to signin with returnTo info
+      window.location.href = `/signin?returnTo=page&plan=${planName}&price=${price}`;
+    }
+  };
 
   const renderStyledText = (text: string) => {
     const parts = text.split("mrt.lk");
@@ -50,6 +80,10 @@ export default function Home() {
     return text;
   };
 
+  const handleSignOut = async () => {
+    await supabase.auth.signOut();
+  };
+
   return (
     <div className="min-h-screen relative overflow-hidden bg-[#e0f2fe] text-black">
       {/* Grid Background */}
@@ -66,20 +100,21 @@ export default function Home() {
 
       {/* Top Right Navigation */}
       <div className="absolute top-8 right-8 z-20 flex items-center gap-4">
-        {/* Sign In Button */}
-        <Link
-          href="/signin"
-          className="px-6 py-2 bg-white text-blue-600 font-bold rounded-lg shadow-sm hover:shadow-md transition-all hover:scale-105 active:scale-95 text-sm uppercase tracking-wide border border-blue-100"
-        >
-          Sign In
-        </Link>
-
-        {/* Theme Toggle (Visual only) */}
-        <div className="bg-white/80 p-2 rounded-full cursor-pointer hover:bg-white transition-colors">
-          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6 text-slate-800">
-            <path strokeLinecap="round" strokeLinejoin="round" d="M12 3v2.25m6.364.386l-1.591 1.591M21 12h-2.25m-.386 6.364l-1.591-1.591M12 18.75V21m-4.773-4.227l-1.591 1.591M5.25 12H3m4.227-4.773L5.636 5.636M15.75 12a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0z" />
-          </svg>
-        </div>
+        {user ? (
+          <button
+            onClick={handleSignOut}
+            className="px-6 py-2 bg-white text-red-600 font-bold rounded-lg shadow-sm hover:shadow-md transition-all hover:scale-105 active:scale-95 text-sm uppercase tracking-wide border border-red-100"
+          >
+            Sign Out
+          </button>
+        ) : (
+          <Link
+            href="/signin"
+            className="px-6 py-2 bg-white text-blue-600 font-bold rounded-lg shadow-sm hover:shadow-md transition-all hover:scale-105 active:scale-95 text-sm uppercase tracking-wide border border-blue-100"
+          >
+            Sign In
+          </Link>
+        )}
       </div>
 
       {/* Main Content */}
@@ -139,14 +174,29 @@ export default function Home() {
       <div className="flex flex-col gap-1/10">
         <FeatureCards />
         <ProcessFlow />
-        <PricingSection />
+        <PricingSection onSelectPlan={handlePlanSelect} />
         <HostingEmailSection />
         <FAQSection />
+        <UsagePolicy onRequestClick={() => {
+          setSelectedPrice("600.00");
+          setIsFormOpen(true);
+        }} />
       </div>
       {/* Feature Section (Pushed below fold) */}
 
+      <ContactButton />
+
       {/* Request Form Modal */}
-      {isFormOpen && <RequestForm onClose={() => setIsFormOpen(false)} />}
+      {isFormOpen && (
+        <RequestForm
+          price={selectedPrice}
+          onClose={() => {
+            setIsFormOpen(false);
+            setSelectedPrice("600.00");
+          }}
+        />
+      )}
     </div>
+
   );
 }

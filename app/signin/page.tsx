@@ -18,18 +18,42 @@ export default function SignInPage() {
         setLoading(true);
 
         try {
+            // 1. Check if user exists in our profiles table for extra validation
+            const { data: profileData, error: profileError } = await supabase
+                .from("profiles")
+                .select("email")
+                .eq("email", email)
+                .single();
+
+            if (profileError || !profileData) {
+                console.log("Profile check failed or not found:", profileError);
+                // We'll still try to sign in, but this might be the reason for "not valid"
+            }
+
+            // 2. Perform Supabase Auth Sign In
             const { data, error: signInError } = await supabase.auth.signInWithPassword({
                 email,
                 password,
             });
 
-            if (signInError) throw signInError;
+            if (signInError) {
+                // Better error messages for the user
+                if (signInError.message.includes("Email not confirmed")) {
+                    setError("Please confirm your email address before signing in.");
+                } else if (signInError.message.includes("Invalid login credentials")) {
+                    setError("Invalid email or password. Please check your details.");
+                } else {
+                    setError(signInError.message);
+                }
+                throw signInError;
+            }
 
             console.log("Sign in successful:", data);
             router.push("/"); // Redirect to home on success
         } catch (err: any) {
-            setError(err.message || "Invalid email or password");
             console.error("Sign in error:", err);
+            // Error is already set above for specific cases
+            if (!error) setError(err.message || "Invalid login credentials");
         } finally {
             setLoading(false);
         }
