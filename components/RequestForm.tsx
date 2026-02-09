@@ -200,14 +200,19 @@ export default function RequestForm({ onClose, price = "600.00", initialSubdomai
 
                         {/* Phone */}
                         <div>
-                            <label className="block text-sm font-bold text-blue-900 mb-1.5">Phone / WhatsApp</label>
+                            <label className="block text-sm font-bold text-blue-900 mb-1.5">Phone / WhatsApp (10 Digits)</label>
                             <input
                                 required
                                 type="tel"
+                                maxLength={10}
+                                pattern="[0-9]{10}"
                                 value={phone}
-                                onChange={(e) => setPhone(e.target.value)}
-                                placeholder="+94 XX XXX XXXX"
-                                className="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-lg text-slate-700 outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-100 transition-all"
+                                onChange={(e) => {
+                                    const value = e.target.value.replace(/\D/g, "");
+                                    if (value.length <= 10) setPhone(value);
+                                }}
+                                placeholder="07XXXXXXXX"
+                                className="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-lg text-slate-700 outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-100 transition-all font-mono"
                             />
                         </div>
 
@@ -263,10 +268,11 @@ export default function RequestForm({ onClose, price = "600.00", initialSubdomai
 
                         {/* Bank Slip Upload */}
                         <div>
-                            <label className="block text-sm font-bold text-blue-900 mb-1.5 uppercase tracking-wide">Upload Bank Slip (PDF / Image)</label>
+                            <label className="block text-sm font-bold text-blue-900 mb-1.5 uppercase tracking-wide">
+                                Upload Bank Slip (PDF / Image) - <span className="text-blue-500 normal-case">Optional: Pay later</span>
+                            </label>
                             <div className="relative group">
                                 <input
-                                    required
                                     type="file"
                                     accept=".pdf,image/*"
                                     onChange={(e) => setBankSlip(e.target.files?.[0] || null)}

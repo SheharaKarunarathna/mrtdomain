@@ -22,6 +22,7 @@ export default function Home() {
   const [isUserMenuOpen, setIsUserMenuOpen] = useState(false);
   const [user, setUser] = useState<User | null>(null);
   const [selectedPrice, setSelectedPrice] = useState("600.00");
+  const [pendingPlan, setPendingPlan] = useState<{ name: string, price: string } | null>(null);
   const fullText = "Then Hurry up! Reserve your mrt.lk subdomain now!";
 
   useEffect(() => {
@@ -63,8 +64,9 @@ export default function Home() {
       setSelectedPrice(price);
       setIsFormOpen(true);
     } else {
-      // Redirect to signin with returnTo info
-      window.location.href = `/signin?returnTo=page&plan=${planName}&price=${price}`;
+      // Store pending plan and open login modal
+      setPendingPlan({ name: planName, price: price });
+      setIsLoginOpen(true);
     }
   };
 
@@ -263,8 +265,18 @@ export default function Home() {
       {/* Login Modal */}
       <LoginModal
         isOpen={isLoginOpen}
-        onClose={() => setIsLoginOpen(false)}
-        onLoginSuccess={(user) => setUser(user)}
+        onClose={() => {
+          setIsLoginOpen(false);
+          setPendingPlan(null); // Clear pending plan if they just close the modal
+        }}
+        onLoginSuccess={(user) => {
+          setUser(user);
+          if (pendingPlan) {
+            setSelectedPrice(pendingPlan.price);
+            setIsFormOpen(true);
+            setPendingPlan(null);
+          }
+        }}
       />
     </div>
 
