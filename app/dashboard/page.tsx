@@ -80,7 +80,7 @@ export default function Dashboard() {
                 {/* Header */}
                 <div className="flex flex-col md:flex-row justify-between items-start md:items-center mb-10 gap-4">
                     <div>
-                        <Link href="/" className="text-blue-600 font-bold flex items-center gap-2 mb-2 hover:underline">
+                        <Link href="/" className="text-blue-600 font-bold flex items-center gap-2 mb-2 hover:underline cursor-pointer active:scale-95 transition-transform origin-left">
                             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2.5} stroke="currentColor" className="w-4 h-4">
                                 <path strokeLinecap="round" strokeLinejoin="round" d="M10.5 19.5L3 12m0 0l7.5-7.5M3 12h18" />
                             </svg>
@@ -114,7 +114,7 @@ export default function Dashboard() {
                             </div>
                             <h3 className="text-xl font-bold text-slate-800 mb-2">No domain requests yet</h3>
                             <p className="text-slate-500 mb-8 max-w-sm mx-auto">Ready to launch your project? Register your specialized .mrt.lk subdomain today.</p>
-                            <Link href="/" className="inline-block bg-blue-600 text-white font-bold px-8 py-3 rounded-xl hover:bg-blue-700 transition-colors shadow-lg shadow-blue-200">
+                            <Link href="/" className="inline-block bg-blue-600 text-white font-bold px-8 py-3 rounded-xl hover:bg-blue-700 transition-all shadow-lg shadow-blue-200 cursor-pointer active:scale-95">
                                 Get Started
                             </Link>
                         </div>

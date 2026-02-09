@@ -299,7 +299,7 @@ export default function RequestForm({ onClose, price = "600.00", initialSubdomai
                         <button
                             type="submit"
                             disabled={isSubmitting}
-                            className="w-full bg-[#0B3D75] hover:bg-[#093260] disabled:bg-[#0B3D75]/60 text-white font-bold py-4 rounded-lg shadow-md hover:shadow-lg transition-all transform active:scale-[0.98] mt-4 tracking-wide uppercase text-sm flex items-center justify-center gap-2"
+                            className="w-full bg-[#0B3D75] hover:bg-[#093260] disabled:bg-[#0B3D75]/60 text-white font-bold py-4 rounded-lg shadow-md hover:shadow-lg transition-all transform active:scale-95 mt-4 tracking-wide uppercase text-sm flex items-center justify-center gap-2 cursor-pointer"
                         >
                             {isSubmitting ? (
                                 <>
@@ -329,7 +329,7 @@ export default function RequestForm({ onClose, price = "600.00", initialSubdomai
                 {/* Close Button absolute */}
                 <button
                     onClick={onClose}
-                    className="absolute top-4 right-4 p-2 bg-slate-100 hover:bg-slate-200 rounded-full text-slate-500 transition-colors"
+                    className="absolute top-4 right-4 p-2 bg-slate-100 hover:bg-slate-200 rounded-full text-slate-500 transition-all cursor-pointer active:scale-90"
                 >
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor" className="w-5 h-5">
                         <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />

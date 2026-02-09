@@ -59,7 +59,7 @@ export default function PricingSection({ onSelectPlan }: PricingSectionProps) {
 
                     <button
                         onClick={() => onSelectPlan?.("Subdomain", "600.00")}
-                        className="w-full bg-blue-600 hover:bg-blue-500 text-white font-bold py-5 rounded-2xl shadow-blue-200 shadow-xl hover:shadow-2xl transition-all transform active:scale-95 uppercase tracking-wide text-sm"
+                        className="w-full bg-blue-600 hover:bg-blue-500 text-white font-bold py-5 rounded-2xl shadow-blue-200 shadow-xl hover:shadow-2xl transition-all transform active:scale-95 uppercase tracking-wide text-sm cursor-pointer"
                     >
                         Purchase now
                     </button>
@@ -84,7 +84,7 @@ export default function PricingSection({ onSelectPlan }: PricingSectionProps) {
                     </div>
 
                     <ul className="space-y-5 mb-10 flex-1 px-2">
-                        {[  
+                        {[
                             "everything in Subdomain plan",
                             "Create up to 50 sub-subdomains from your main subdomain",
                             "Management dashboard",
@@ -105,7 +105,7 @@ export default function PricingSection({ onSelectPlan }: PricingSectionProps) {
 
                     <button
                         onClick={() => onSelectPlan?.("Network", "2000.00")}
-                        className="w-full bg-white hover:bg-slate-50 text-slate-700 font-bold py-5 rounded-2xl border-2 border-slate-200 hover:border-blue-400 hover:text-blue-600 transition-all uppercase tracking-wide text-sm"
+                        className="w-full bg-white hover:bg-slate-50 text-slate-700 font-bold py-5 rounded-2xl border-2 border-slate-200 hover:border-blue-400 hover:text-blue-600 transition-all uppercase tracking-wide text-sm cursor-pointer active:scale-95"
                     >
                         Purchase now
                     </button>
@@ -146,12 +146,14 @@ export default function PricingSection({ onSelectPlan }: PricingSectionProps) {
                         ))}
                     </ul>
 
-                    <button
-                        onClick={() => onSelectPlan?.("Development", "Negotiable")}
-                        className="w-full bg-white hover:bg-slate-50 text-slate-700 font-bold py-5 rounded-2xl border-2 border-slate-200 hover:border-purple-400 hover:text-purple-600 transition-all uppercase tracking-wide text-sm"
+                    <a
+                        href="https://wa.me/94771595616"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="w-full bg-white hover:bg-slate-50 text-slate-700 font-bold py-5 rounded-2xl border-2 border-slate-200 hover:border-purple-400 hover:text-purple-600 transition-all uppercase tracking-wide text-sm text-center inline-block cursor-pointer active:scale-95"
                     >
                         Contact Sales
-                    </button>
+                    </a>
                 </div>
             </div>
 

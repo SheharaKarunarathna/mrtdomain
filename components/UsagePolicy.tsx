@@ -53,7 +53,7 @@ export default function UsagePolicy() {
 
             <button
                 onClick={scrollToTop}
-                className="bg-slate-900 hover:bg-black text-white font-bold py-4 px-10 rounded-xl shadow-lg hover:shadow-xl transition-all transform active:scale-95 tracking-wide uppercase text-sm flex items-center gap-2 group"
+                className="bg-slate-900 hover:bg-black text-white font-bold py-4 px-10 rounded-xl shadow-lg hover:shadow-xl transition-all transform active:scale-95 tracking-wide uppercase text-sm flex items-center gap-2 group cursor-pointer"
             >
                 <span>Back to Top</span>
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2.5} stroke="currentColor" className="w-4 h-4 transition-transform group-hover:-translate-y-1">

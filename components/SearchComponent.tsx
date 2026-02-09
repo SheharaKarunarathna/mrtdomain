@@ -104,7 +104,7 @@ export default function SearchComponent({ onLoginRequired }: SearchComponentProp
                 <button
                     onClick={handleSearch}
                     disabled={status === "loading"}
-                    className="bg-blue-600 hover:bg-blue-700 text-white px-4 md:px-6 py-2 rounded-md font-medium text-sm md:text-base flex items-center transition-colors shrink-0 disabled:opacity-70"
+                    className="bg-blue-600 hover:bg-blue-700 text-white px-4 md:px-6 py-2 rounded-md font-medium text-sm md:text-base flex items-center transition-all shrink-0 disabled:opacity-70 cursor-pointer active:scale-95"
                 >
                     {status === "loading" ? "..." : "Search"}
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor" className="w-4 h-4 ml-2 hidden md:block">
@@ -140,7 +140,7 @@ export default function SearchComponent({ onLoginRequired }: SearchComponentProp
                             </div>
                             <button
                                 onClick={handleBuyClick}
-                                className="w-full md:w-auto bg-green-600 hover:bg-green-700 text-white font-bold py-3.5 px-8 rounded-lg shadow-md hover:shadow-lg transition-all uppercase text-sm tracking-widest active:scale-95"
+                                className="w-full md:w-auto bg-green-600 hover:bg-green-700 text-white font-bold py-3.5 px-8 rounded-lg shadow-md hover:shadow-lg transition-all uppercase text-sm tracking-widest cursor-pointer active:scale-95"
                             >
                                 Buy this domain
                             </button>

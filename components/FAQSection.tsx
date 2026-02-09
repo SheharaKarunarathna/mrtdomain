@@ -61,13 +61,13 @@ export default function FAQSection() {
                     <div
                         key={index}
                         className={`bg-white rounded-2xl border transition-all duration-300 overflow-hidden ${openIndex === index
-                                ? 'border-blue-200 shadow-lg ring-1 ring-blue-100'
-                                : 'border-slate-100 shadow-sm hover:border-blue-100 hover:shadow-md'
+                            ? 'border-blue-200 shadow-lg ring-1 ring-blue-100'
+                            : 'border-slate-100 shadow-sm hover:border-blue-100 hover:shadow-md'
                             }`}
                     >
                         <button
                             onClick={() => toggleFAQ(index)}
-                            className="w-full text-left p-6 md:p-8 flex items-center justify-between gap-4 outline-none group"
+                            className="w-full text-left p-6 md:p-8 flex items-center justify-between gap-4 outline-none group cursor-pointer"
                         >
                             <span className={`text-lg md:text-xl font-bold transition-colors ${openIndex === index ? 'text-blue-600' : 'text-slate-800 group-hover:text-blue-600'
                                 }`}>
