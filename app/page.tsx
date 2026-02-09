@@ -15,6 +15,7 @@ import UsagePolicy from "@/components/UsagePolicy";
 import ContactButton from "@/components/ContactButton";
 
 export default function Home() {
+  const [hasMounted, setHasMounted] = useState(false);
   const [displayedText, setDisplayedText] = useState("");
   const [isFormOpen, setIsFormOpen] = useState(false);
   const [isLoginOpen, setIsLoginOpen] = useState(false);
@@ -24,6 +25,7 @@ export default function Home() {
   const fullText = "Then Hurry up! Reserve your mrt.lk subdomain now!";
 
   useEffect(() => {
+    setHasMounted(true);
     // Check initial session
     supabase.auth.getSession().then(({ data: { session } }) => {
       setUser(session?.user ?? null);
@@ -96,6 +98,8 @@ export default function Home() {
   const handleSignOut = async () => {
     await supabase.auth.signOut();
   };
+
+  if (!hasMounted) return null;
 
   return (
     <div className="min-h-screen relative overflow-hidden bg-[#e0f2fe] text-black">
